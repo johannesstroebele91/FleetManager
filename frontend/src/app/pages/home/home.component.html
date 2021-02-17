@@ -1,0 +1,38 @@
+<div class="content" role="main">
+
+    <div class="header">
+        <h1>Top 100 Albums</h1>
+        <p class="description">Here, you get an overview of the 100 albums that iTunes users most often listened to.
+            Use the search to find out the respective album.</p>
+
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Search an album</mat-label>
+                <label>
+                    <input matInput placeholder="Search..." value="" [(ngModel)]="searchTerm" (keyup)="search()"
+                           name="search">
+                </label>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="albums">
+
+        <!-- Display all albums with ngFor -->
+        <mat-card *ngFor="let driver of driversDisplayed; let i = index">
+            <button class="album-placement" mat-mini-fab color="primary" aria-label=" icon">
+                {{i + 1}}.
+            </button>
+            <h3><b>{{driver.driverName}}</b></h3>
+            <p>Home Country: {{driver.driverCityOrigin}}</p>
+            <p>Language: {{driver.driverLanguage}}</p>
+            <p>Attributes: {{driver.driverInfo}}</p>
+            <p>License Plate: {{driver.licensePlate}}</p>
+            <p>Kilometers Driven: {{driver.kmDriven}} km</p>
+            <p>Current location: {{driver.location}}</p> <!-- Example: "-59.6596345", "-37.231019" -->
+            <a href="{{driver.driverPhone}}">
+                <button mat-raised-button color="primary">Call Driver ({{driver.driverPhone}})</button>
+            </a>
+        </mat-card>
+    </div>
+</div>

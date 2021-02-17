@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.content {
+  margin: 82px auto 32px;
+  padding: 0 16px;
+}
+
+.mat-card {
+  margin: 12px;
+  max-width: 200px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.album-placement {
+  position: relative;
+  top: -30px;
+  left: -30px;
+}
+
+.description {
+  max-width: 480px;
+}
+
+.albums {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}

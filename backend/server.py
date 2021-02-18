@@ -4,7 +4,7 @@ import threading
 from random import randrange, random
 
 import bottle
-from bottle import route, run, static_file, response
+from bottle import route, static_file, response
 from faker import Faker
 
 # initialize instance of Faker class to create fake data for drivers
@@ -21,10 +21,10 @@ class Driver:
         self.info = fake.catch_phrase()
         self.licensePlate = fake.license_plate()
         self.kmDriven = int(random() * 100000)
-        self.location = [str(fake.latitude()), str(fake.longitude())]
+        self.location = [float(fake.latitude()), float(fake.longitude())]
 
     def update_location(self):
-        self.location = [str(fake.latitude()), str(fake.longitude())]
+        self.location = [float(fake.latitude()), float(fake.longitude())]
 
 
 # generating 10 drivers based on the Driver class
@@ -50,7 +50,8 @@ def updatejson(driver):
         "driverPhone": driver.phone,
         'driverInfo': driver.info,
         "licensePlate": driver.licensePlate,
-        'location': [str(driver.location[0]), str(driver.location[1])]
+        "kmDriven": driver.kmDriven,
+        'location': [float(driver.location[0]), float(driver.location[1])]
     }
     o.append(d)
     file = open("./drivers.get.json", "w")

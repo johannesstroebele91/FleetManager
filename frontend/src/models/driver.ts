@@ -6,5 +6,5 @@
         driverInfo: string;
         licensePlate: string;
         kmDriven: number;
-        location: string[];
+        location: number[];
     }

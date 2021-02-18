@@ -1,6 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from './home.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +15,11 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      imports: [HttpClientTestingModule, MatIconModule, MatButtonModule, MatCardModule, MatInputModule, NoopAnimationsModule],
+      declarations: [HomeComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +30,42 @@ describe('HomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  // Testing click event for selecting a driver on the map
+  describe('clickMarker', () => {
+    it('should reset  driverDisplayed from selectedDriver', () => {
+      component.drivers = [{
+        driverName: 'Jaime Turner',
+        driverCityOrigin: 'Moraland',
+        driverLanguage: 'nl',
+        driverPhone: '957-384-1666x4702',
+        driverInfo: 'Centralized solution-oriented adapter',
+        licensePlate: 'G06 2JC',
+        kmDriven: 5783284,
+        location: [
+          15.6220395,
+          -69.596014
+        ]
+      },
+      ];
+      component.selectedDriver = {
+        driverName: 'Jaime Turner',
+        driverCityOrigin: 'Moraland',
+        driverLanguage: 'nl',
+        driverPhone: '957-384-1666x4702',
+        driverInfo: 'Centralized solution-oriented adapter',
+        licensePlate: 'G06 2JC',
+        kmDriven: 312342,
+        location: [
+          15.6220395,
+          -69.596014,
+        ]
+      };
+      component.clickMarker(null);
+
+      expect(component.selectedDriver).toBeNull();
+      expect(component.driversDisplayed).toEqual(component.drivers);
+    });
   });
 });

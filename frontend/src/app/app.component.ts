@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'iTunes Top 100 Albums';
+  title = 'fleetmanager';
 
   constructor() {
   }

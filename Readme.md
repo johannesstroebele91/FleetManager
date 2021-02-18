@@ -1,7 +1,5 @@
 # What is this about?
-This challenge is part of the KINEXON interview process for full stack developers. 
-It gives you the opportunity to show us your skills, interests and how you work in
-general.
+This challenge is part of the KINEXON coding challenge. 
 
 We provided a not particularly well-written backend in server.py. It creates a REST
 API that serves data with locations. There is one TODO in the code that we'd like

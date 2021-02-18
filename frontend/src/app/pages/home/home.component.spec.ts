@@ -34,11 +34,11 @@ describe('HomeComponent', () => {
 
   // Testing click event for selecting a driver on the map
   describe('clickMarker', () => {
-    it('should reset  driverDisplayed from selectedDriver', () => {
+    it('should reset click event for the selectedDriver to driverDisplayed', () => {
       component.drivers = [{
         driverName: 'Jaime Turner',
         driverCityOrigin: 'Moraland',
-        driverLanguage: 'nl',
+        driverLanguage: 'German',
         driverPhone: '957-384-1666x4702',
         driverInfo: 'Centralized solution-oriented adapter',
         licensePlate: 'G06 2JC',
@@ -54,7 +54,7 @@ describe('HomeComponent', () => {
       component.selectedDriver = {
         driverName: 'Jaime Turner',
         driverCityOrigin: 'Moraland',
-        driverLanguage: 'nl',
+        driverLanguage: 'Spanish',
         driverPhone: '957-384-1666x4702',
         driverInfo: 'Centralized solution-oriented adapter',
         licensePlate: 'G06 2JC',

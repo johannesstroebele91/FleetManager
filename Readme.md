@@ -24,7 +24,6 @@ The shell script is written for python3 and Unix/macOS. if you are a windows use
 if you prefer to use python2, you might have to change a thing or two for setting up 
 the virtual environment.
 
-
 # Usage
 To see the index.html for the frontend, open your browser at:
 http://localhost:8080/  
@@ -32,3 +31,8 @@ The backend additionally serves a REST API under
 GET http://localhost:8080/  
 The response is a list of drivers containing some profile information and
 geographical positions.
+
+# Next steps
+* Clarify the goal of the application using interviews and survey with the users and the respective company 
+* Implement tests to ensure that the application is working as expected
+* Analyze the data and create visualizations to make the data easier to understand for the users

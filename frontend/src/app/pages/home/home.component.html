@@ -25,6 +25,7 @@
     <p class="description">The driver and their respective information can be search by their the name of the
       driver.</p>
 
+    <!-- Enable search for driver's name using ngModel and the keyup event -->
     <form class="example-form">
       <mat-form-field class="example-full-width">
         <mat-label>Search an driver</mat-label>
@@ -38,7 +39,7 @@
 
   <div class="drivers">
 
-    <!-- Display all drivers with ngFor -->
+    <!-- Display all drivers with ngFor directive -->
     <mat-card *ngFor="let driver of driversDisplayed; let i = index">
       <button class="driver-placement" mat-mini-fab color="primary" aria-label=" icon">
         {{i + 1}}.
@@ -52,7 +53,7 @@
         <li>Driven: {{driver.kmDriven}} km</li>
       </ul>
       <a href="tel:{{driver.driverPhone}}">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" class="button-hovered">
           <mat-icon class="icon" aria-hidden="false" aria-label="Avatar">call</mat-icon>
           {{driver.driverPhone}}
         </button>

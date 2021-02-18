@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .icon {
   padding: 0 12px;
 }
@@ -5,6 +7,15 @@
 .toolbar-spacer {
   flex: 1 1 auto;
 }
+
 .mat-toolbar {
   align-items: center;
+}
+
+.text-hovered:hover {
+  color: lightblue;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

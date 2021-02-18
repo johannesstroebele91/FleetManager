@@ -11,6 +11,7 @@ export class DriversService {
   constructor(private http: HttpClient) {
   }
 
+  // Request data from the backend using an observable
   getDriversData(): Observable<Driver[]> {
     return this.http.get<Driver[]>('http://localhost:8080/drivers');
   }

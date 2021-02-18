@@ -7,10 +7,11 @@ import threading
 file = open('drivers.get.json', 'w+')
 file.write("[]")
 
-# generate fake driver profile using Driver class and Faker library
+# initialize instance of Faker class to create fake data for drivers
 fake = Faker()
 
 
+# giver class with constructor and update location function
 class Driver:
     def __init__(self):
         self.name = fake.name()
@@ -27,72 +28,36 @@ class Driver:
 
 
 # generating 10 drivers based on the Driver class
-drivers = list()
+drivers = []
 for i in range(10):
     drivers.append(Driver())
 
 
 # write drivers into json file
-def initializejson(drivers):
-    try:
-        print('here')
-        o = json.loads(open("drivers.get.json", "r").read())
-    except:
-        print('there')
-        o = []
-    for driver in drivers:
-        d = {
-            "driverName": driver.name,
-            "driverCityOrigin": driver.cityOrigin,
-            "driverLanguage": driver.language,
-            "driverPhone": driver.phone,
-            'driverInfo': driver.info,
-            "licensePlate": driver.licensePlate,
-            'location': [str(driver.location[0]), str(driver.location[1])]
-        }
-    o.append(d)
-    file = open("./drivers.get.json", "w")
-    file.write(json.dumps(o))
-
-
-initializejson(drivers)
-
-
-# generate fake driver profile
-def genobj():
-    fake = Faker()
+def updatejson(driver):
     try:
         o = json.loads(open("drivers.get.json", "r").read())
     except:
         o = []
     d = {
-        "driverName": fake.name(),
-        "driverCityOrigin": fake.city(),
-        "driverLanguage": ['de', 'en', 'nl', 'fr', 'es', 'ar'][randrange(6)],
-        "driverPhone": fake.phone_number(),
-        'driverInfo': fake.catch_phrase(),
-        "licensePlate": fake.license_plate(),
-        "kmDriven": int(random() * 100000),
-        'location': [str(fake.latitude()), str(fake.longitude())]
+        "driverName": driver.name,
+        "driverCityOrigin": driver.cityOrigin,
+        "driverLanguage": driver.language,
+        "driverPhone": driver.phone,
+        'driverInfo': driver.info,
+        "licensePlate": driver.licensePlate,
+        'location': [str(driver.location[0]), str(driver.location[1])]
     }
     o.append(d)
     file = open("./drivers.get.json", "w")
     file.write(json.dumps(o))
 
 
-# generate 10 fake drivers
-genobj()
-genobj()
-genobj()
-genobj()
-genobj()
-genobj()
-genobj()
-genobj()
-genobj()
+for driver in drivers:
+    updatejson(driver)
 
 
-# TODO randomly update driver location every 5 seconds
+# TODO randomly update the location of the drivers every 5 seconds
 def updatedrivers():
     threading.Timer(5.0, updatedrivers).start()  # called every minute
     print(drivers[0].name)
@@ -101,8 +66,10 @@ def updatedrivers():
     for driver in drivers:
         driver.update_location()
 
+    updatejson(drivers)
 
-updatedrivers()
+
+# updatedrivers()
 
 
 # Routing

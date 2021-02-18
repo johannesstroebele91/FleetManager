@@ -43,6 +43,8 @@ describe('HomeComponent', () => {
         driverInfo: 'Centralized solution-oriented adapter',
         licensePlate: 'G06 2JC',
         kmDriven: 5783284,
+        goalState: 'Delayed',
+        goalCompletionPercent: 78,
         location: [
           15.6220395,
           -69.596014
@@ -57,6 +59,8 @@ describe('HomeComponent', () => {
         driverInfo: 'Centralized solution-oriented adapter',
         licensePlate: 'G06 2JC',
         kmDriven: 312342,
+        goalState: 'On time',
+        goalCompletionPercent: 42,
         location: [
           15.6220395,
           -69.596014,

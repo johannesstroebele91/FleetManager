@@ -1,8 +1,15 @@
 <div class="content" role="main">
 
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <h1><b>Driver Location</b></h1>
+    <p class="description">Hi Anika, this map lets you find out where your drivers currently are. Click on a marker on
+      the map to
+      display the information of the respective driver below. </p>
+  </div>
+
   <!-- Display map (https://github.com/angular/components/tree/master/src/google-maps#readme) -->
-  <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="apiLoaded | async">
-    <google-map [options]="options">
+  <div *ngIf="apiLoaded | async" class="map">
+    <google-map [options]="options" width="100%">
       <map-marker
         *ngFor="let driver of driversDisplayed"
         [position]="{lat: driver.location[0], lng: driver.location[1]}"
@@ -13,9 +20,10 @@
     </google-map>
   </div>
 
-  <div class="header">
-    <h1>Driver Overview</h1>
-    <p class="description">Hi Anika, here you can get an overview of the drivers that you manage.</p>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <h2>Driver Overview</h2>
+    <p class="description">The driver and their respective information can be search by their the name of the
+      driver.</p>
 
     <form class="example-form">
       <mat-form-field class="example-full-width">
@@ -37,11 +45,11 @@
       </button>
       <h3><b>{{driver.driverName}}</b></h3>
       <ul>
-        <li>Home Country: {{driver.driverCityOrigin}}</li>
+        <li>Goal Reached: {{driver.goalCompletionPercent}} %</li>
+        <li>State: {{driver.goalState}}</li>
         <li>Language: {{driver.driverLanguage}}</li>
-        <li>Attributes: {{driver.driverInfo}}</li>
         <li>License Plate: {{driver.licensePlate}}</li>
-        <li>Kilometers Driven: {{driver.kmDriven}} km</li>
+        <li>Driven: {{driver.kmDriven}} km</li>
       </ul>
       <a href="tel:{{driver.driverPhone}}">
         <button mat-raised-button color="primary">

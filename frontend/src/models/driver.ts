@@ -6,5 +6,7 @@
         driverInfo: string;
         licensePlate: string;
         kmDriven: number;
+      goalState: string;
+      goalCompletionPercent: number;
         location: number[];
     }

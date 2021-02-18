@@ -1,10 +1,11 @@
 import json
 import os
+import random as rand
 import threading
 from random import randrange, random
 
 import bottle
-from bottle import route, static_file, response
+from bottle import response
 from faker import Faker
 
 # initialize instance of Faker class to create fake data for drivers
@@ -14,13 +15,15 @@ fake = Faker()
 # giver class with constructor and update location function
 class Driver:
     def __init__(self):
-        self.name = fake.name()
-        self.cityOrigin = fake.city()
-        self.language = ['de', 'en', 'nl', 'fr', 'es', 'ar'][randrange(6)]
-        self.phone = fake.phone_number()
-        self.info = fake.catch_phrase()
+        self.driverName = fake.name()
+        self.driverCityOrigin = fake.city()
+        self.driverLanguage = ['German', 'English', 'French', 'Spanish', 'Dutch', 'Chinese'][randrange(6)]
+        self.driverPhone = fake.phone_number()
+        self.driverInfo = fake.catch_phrase()
         self.licensePlate = fake.license_plate()
         self.kmDriven = int(random() * 100000)
+        self.goalState = ['On time', 'Delayed', 'Maintenance', 'Delayed', 'Idle'][randrange(5)]
+        self.goalCompletionPercent = int(rand.randint(1, 101))
         self.location = [float(fake.latitude()), float(fake.longitude())]
 
     def update_location(self):
@@ -44,14 +47,16 @@ def updatejson(driver):
     except:
         o = []
     d = {
-        "driverName": driver.name,
-        "driverCityOrigin": driver.cityOrigin,
-        "driverLanguage": driver.language,
-        "driverPhone": driver.phone,
-        'driverInfo': driver.info,
+        "driverName": driver.driverName,
+        "driverCityOrigin": driver.driverCityOrigin,
+        "driverLanguage": driver.driverLanguage,
+        "driverPhone": driver.driverPhone,
+        'driverInfo': driver.driverInfo,
         "licensePlate": driver.licensePlate,
         "kmDriven": driver.kmDriven,
-        'location': [float(driver.location[0]), float(driver.location[1])]
+        "goalState": driver.goalState,
+        "goalCompletionPercent": driver.goalCompletionPercent,
+        "location": [float(driver.location[0]), float(driver.location[1])]
     }
     o.append(d)
     file = open("./drivers.get.json", "w")
@@ -102,6 +107,8 @@ app = bottle.app()
 
 
 @app.route('/drivers', method=['OPTIONS', 'GET'])
+# allows to indicate any other origins (domain, scheme, or port)
+# than its own from which a browser should permit loading of resources
 @enable_cors
 def lvambience():
     response.headers['Content-type'] = 'application/json'
@@ -110,26 +117,4 @@ def lvambience():
 
 file.close()
 
-
-@route('/')
-def serve_static(file_path="index.html"):
-    return static_file(file_path, root='./app/')
-
-
 app.run(host='localhost', port=8080, debug=True)
-
-'''
-# Routing
-@route('/')
-def serve_static(file_path="index.html"):
-    return static_file(file_path, root='./app/')
-
-
-@route('/drivers')
-def get_cars():
-    return open("./drivers.get.json", "r").read()
-
-
-file.close()
-run(host='localhost', port=8080, debug=True)
-'''

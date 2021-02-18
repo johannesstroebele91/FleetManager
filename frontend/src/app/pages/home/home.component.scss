@@ -1,11 +1,6 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.content {
-  margin: 82px auto 32px;
-  padding: 0 16px;
-}
-
 .mat-card {
   margin: 12px;
   max-width: 200px;
@@ -40,11 +35,15 @@
   align-content: stretch;
 }
 
-.header {
+.center {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   align-content: stretch;
+}
+
+.map {
+  margin: 30px;
 }

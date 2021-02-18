@@ -6,12 +6,12 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {FooterComponent} from './components/footer/footer.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {HomeComponent} from './pages/home/home.component';
-import {WishlistComponent} from './pages/wishlist/wishlist.component';
+import {ProfileComponent} from './pages/profile/profile.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -25,7 +25,7 @@ import {FlexModule} from '@angular/flex-layout';
     FooterComponent,
     NavigationComponent,
     HomeComponent,
-    WishlistComponent,
+    ProfileComponent,
   ],
   imports: [
     HttpClientModule,

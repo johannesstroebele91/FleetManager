@@ -1,11 +1,8 @@
-import json
+import os, json
 from random import randrange, random
 from bottle import route, run, static_file
 from faker import Faker
 import threading
-
-file = open('drivers.get.json', 'w+')
-file.write("[]")
 
 # initialize instance of Faker class to create fake data for drivers
 fake = Faker()
@@ -28,12 +25,16 @@ class Driver:
 
 
 # generating 10 drivers based on the Driver class
-drivers = []
+drivers = list()
 for i in range(10):
     drivers.append(Driver())
 
-
 # write drivers into json file
+file = open('drivers.get.json', 'w+')
+file.write("[]")
+file.close()
+
+
 def updatejson(driver):
     try:
         o = json.loads(open("drivers.get.json", "r").read())
@@ -51,26 +52,28 @@ def updatejson(driver):
     o.append(d)
     file = open("./drivers.get.json", "w")
     file.write(json.dumps(o))
+    file.close()
 
 
 for driver in drivers:
     updatejson(driver)
 
-
-# TODO randomly update the location of the drivers every 5 seconds
+# Randomly update the location of the drivers every 5 seconds
 def updatedrivers():
+    os.remove("drivers.get.json")
+    file = open('drivers.get.json', 'w+')
+    file.write("[]")
+    file.close()
+
     threading.Timer(5.0, updatedrivers).start()  # called every minute
-    print(drivers[0].name)
-    print(drivers[0].location)
 
     for driver in drivers:
         driver.update_location()
 
-    updatejson(drivers)
+    for driver in drivers:
+        updatejson(driver)
 
-
-# updatedrivers()
-
+updatedrivers()
 
 # Routing
 @route('/')
@@ -83,4 +86,5 @@ def get_cars():
     return open("./drivers.get.json", "r").read()
 
 
+file.close()
 run(host='localhost', port=8080, debug=True)

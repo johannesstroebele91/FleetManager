@@ -1,8 +1,11 @@
-import os, json
-from random import randrange, random
-from bottle import route, run, static_file
-from faker import Faker
+import json
+import os
 import threading
+from random import randrange, random
+
+import bottle
+from bottle import route, run, static_file, response
+from faker import Faker
 
 # initialize instance of Faker class to create fake data for drivers
 fake = Faker()
@@ -58,6 +61,7 @@ def updatejson(driver):
 for driver in drivers:
     updatejson(driver)
 
+
 # Randomly update the location of the drivers every 5 seconds
 def updatedrivers():
     os.remove("drivers.get.json")
@@ -73,8 +77,47 @@ def updatedrivers():
     for driver in drivers:
         updatejson(driver)
 
+
 updatedrivers()
 
+
+# the decorator
+def enable_cors(fn):
+    def _enable_cors(*args, **kwargs):
+        # set CORS headers
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
+        response.headers[
+            'Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+
+        if bottle.request.method != 'OPTIONS':
+            # actual request; reply with the actual response
+            return fn(*args, **kwargs)
+
+    return _enable_cors
+
+
+app = bottle.app()
+
+
+@app.route('/drivers', method=['OPTIONS', 'GET'])
+@enable_cors
+def lvambience():
+    response.headers['Content-type'] = 'application/json'
+    return open("./drivers.get.json", "r").read()
+
+
+file.close()
+
+
+@route('/')
+def serve_static(file_path="index.html"):
+    return static_file(file_path, root='./app/')
+
+
+app.run(host='localhost', port=8080, debug=True)
+
+'''
 # Routing
 @route('/')
 def serve_static(file_path="index.html"):
@@ -88,3 +131,4 @@ def get_cars():
 
 file.close()
 run(host='localhost', port=8080, debug=True)
+'''

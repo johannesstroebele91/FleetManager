@@ -1,5 +1,5 @@
 # 1. Summary
-This web application was developed for the full stack developer - code challenge by [https://kinexon.com/](https://kinexon.com/). The goal is to give fleet managers an overview of important information about their drivers. For example, where they are currently or which phone number their drivers have.
+This web application was developed for the full stack developer - code challenge by [Kinexon](https://kinexon.com/). The goal is to give fleet managers an overview of important information about their drivers. For example, where they are currently or which phone number their drivers have.
 
 # 2. Technology Stack
 The most important technology used for the application are the following ones:
